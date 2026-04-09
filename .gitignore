@@ -1,0 +1,17 @@
+# ─── Variables de entorno ─────────────────────────────────────────────────────
+.env
+
+# ─── Backend ──────────────────────────────────────────────────────────────────
+backend/target/
+backend/.idea/
+backend/*.iml
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# ─── Frontend ─────────────────────────────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
