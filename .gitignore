@@ -14,4 +14,8 @@ frontend/.angular/
 
 # ─── OS ───────────────────────────────────────────────────────────────────────
 .DS_Store
-Thumbs.db
+Thumbs.
+
+# IntelliJ
+.idea/
+*.iml
