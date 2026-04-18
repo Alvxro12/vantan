@@ -1,0 +1,15 @@
+.hamburger {
+  .bar-1, .bar-2, .bar-3 {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: #F5F0E8;
+    transition: all 0.3s ease;
+  }
+}
+
+.hamburger-open {
+  .bar-1 { transform: translateY(7px) rotate(45deg); }
+  .bar-2 { opacity: 0; }
+  .bar-3 { transform: translateY(-7px) rotate(-45deg); }
+}

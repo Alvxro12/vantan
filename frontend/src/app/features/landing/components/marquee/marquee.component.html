@@ -1,0 +1,11 @@
+<div class="marquee-container relative overflow-hidden py-6 border-y border-border">
+  <div class="marquee-track">
+    @for (item of doubledItems; track $index) {
+      <span [class]="item.text === '—'
+        ? 'font-mono text-xs text-gold/40 px-8 whitespace-nowrap'
+        : 'font-mono text-xs tracking-[0.3em] text-cream/30 uppercase px-8 whitespace-nowrap'">
+        {{ item.text }}
+      </span>
+    }
+  </div>
+</div>

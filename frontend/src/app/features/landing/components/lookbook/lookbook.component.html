@@ -1,0 +1,56 @@
+<section
+  #sectionRef
+  class="px-8 md:px-16 py-section transition-all duration-700"
+  [class.opacity-0]="!visible()"
+  [class.translate-y-8]="!visible()">
+
+  <!-- Header -->
+  <div class="flex flex-col items-center gap-4 mb-16">
+    <div class="flex items-center gap-4">
+      <div class="w-8 h-px bg-gold/60"></div>
+      <span class="font-mono text-xs tracking-[0.3em] text-gold/70 uppercase">LOOKBOOK • AW25</span>
+      <div class="w-8 h-px bg-gold/60"></div>
+    </div>
+    <h2 class="font-display text-4xl md:text-5xl text-center">
+      <span class="text-cream">Forma, </span><em class="italic text-gold">luz</em><span class="text-cream">, reposo</span>
+    </h2>
+  </div>
+
+  <!-- Grid asimétrico -->
+  <div class="grid grid-cols-12 gap-4">
+
+    <!-- Frame grande: 7 columnas -->
+    <div class="col-span-12 md:col-span-7">
+      <div class="aspect-[3/4] bg-surface relative overflow-hidden group">
+        <img [src]="largeFrame.image" [alt]="largeFrame.label"
+             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+        <div class="absolute inset-0 pointer-events-none"
+             style="background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)">
+        </div>
+        <span class="absolute top-4 left-4 font-mono text-xs text-cream/50">#{{ largeFrame.id }}</span>
+        <span class="absolute bottom-4 left-4 font-mono text-xs text-cream/60 tracking-[0.15em]">
+          {{ largeFrame.label }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Columna derecha: 5 columnas, 2 frames apilados -->
+    <div class="col-span-12 md:col-span-5 flex flex-col gap-4">
+      @for (frame of smallFrames; track frame.id) {
+        <div class="flex-1 bg-surface relative overflow-hidden group min-h-48">
+          <img [src]="frame.image" [alt]="frame.label"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          <div class="absolute inset-0 pointer-events-none"
+               style="background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%)">
+          </div>
+          <span class="absolute top-4 left-4 font-mono text-xs text-cream/50">#{{ frame.id }}</span>
+          <span class="absolute bottom-4 left-4 font-mono text-xs text-cream/60 tracking-[0.15em]">
+            {{ frame.label }}
+          </span>
+        </div>
+      }
+    </div>
+
+  </div>
+
+</section>

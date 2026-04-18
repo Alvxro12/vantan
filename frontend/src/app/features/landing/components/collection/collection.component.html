@@ -1,0 +1,75 @@
+<section
+  #sectionRef
+  class="px-8 md:px-16 py-section transition-all duration-700"
+  [class.opacity-0]="!visible()"
+  [class.translate-y-8]="!visible()">
+
+  <!-- Header -->
+  <div class="flex flex-col items-center gap-4 mb-16">
+    <div class="flex items-center gap-4">
+      <div class="w-8 h-px bg-gold/60"></div>
+      <span class="font-mono text-xs tracking-[0.3em] text-gold/70 uppercase">EDICION 01 • OTOÑO 25</span>
+      <div class="w-8 h-px bg-gold/60"></div>
+    </div>
+    <h2 class="font-display text-4xl md:text-5xl text-center">
+      <span class="text-cream">Tres siluetas, </span><em class="italic text-gold">una intención</em>
+    </h2>
+  </div>
+
+  <!-- Grid de productos -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    @for (p of products; track p.id) {
+
+      <article>
+        <!-- Imagen placeholder -->
+        <div class="aspect-[3/4] bg-surface relative overflow-hidden group">
+
+          <!-- Imagen de producto -->
+          <img [src]="p.image" [alt]="p.name"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+
+          <!-- Velo de gradiente sobre la imagen -->
+          <div class="absolute inset-0 pointer-events-none"
+               style="background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 60%)">
+          </div>
+
+          <!-- Número de edición -->
+          <span class="absolute top-4 left-4 font-mono text-xs text-cream/40 tracking-[0.2em]">
+            {{ p.index }}
+          </span>
+
+          <!-- Badge -->
+          @if (p.badge) {
+            <span class="absolute top-4 right-4 border border-gold/60 text-gold text-xs font-mono tracking-[0.15em] px-2 py-1 uppercase">
+              {{ p.badge }}
+            </span>
+          }
+
+          <!-- Label de producto -->
+          <span class="absolute bottom-4 left-4 font-mono text-xs text-cream/30 tracking-[0.2em]">
+            [ PRODUCT • {{ p.name | uppercase }} ]
+          </span>
+
+        </div>
+
+        <!-- Info -->
+        <div class="pt-4">
+          <div class="flex justify-between items-start">
+            <h3 class="font-display text-xl text-cream">{{ p.name }}</h3>
+            <span class="font-body font-light text-cream/70 text-sm">€ {{ p.price }},00</span>
+          </div>
+          <div class="flex justify-end mt-1">
+            <span class="font-mono text-xs text-cream/30 tracking-[0.15em]">
+              {{ p.material }} • {{ p.color }}
+            </span>
+          </div>
+          <a class="inline-flex items-center gap-2 mt-4 font-mono text-xs text-cream/60 tracking-[0.2em] border-b border-cream/20 pb-px hover:text-gold hover:border-gold transition-colors duration-300 cursor-pointer">
+            VER MAS →
+          </a>
+        </div>
+      </article>
+
+    }
+  </div>
+
+</section>

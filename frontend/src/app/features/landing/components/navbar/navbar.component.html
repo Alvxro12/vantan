@@ -1,0 +1,71 @@
+<header
+  class="fixed top-0 z-50 w-full transition-all duration-500"
+  [class.bg-transparent]="!scrolled()"
+  [class.bg-black]="scrolled()"
+  [class.backdrop-blur-md]="scrolled()">
+
+  <div class="flex items-center justify-between px-8 md:px-16 py-6">
+
+    <!-- Logo -->
+    <a href="/" class="font-display tracking-[0.3em] text-cream text-sm uppercase">
+      VANTAN
+    </a>
+
+    <!-- Nav links — desktop -->
+    <nav class="hidden md:flex items-center gap-8">
+      @for (link of navLinks; track link.href) {
+        <a [href]="link.href"
+           class="font-body font-light text-xs tracking-[0.2em] text-cream/70 uppercase hover:text-cream transition-colors duration-300">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <!-- Auth buttons — desktop -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/login"
+         class="font-body font-light text-xs tracking-[0.2em] text-cream/70 uppercase hover:text-cream transition-colors duration-300">
+        login
+      </a>
+      <a href="/register"
+         class="border border-gold text-gold text-xs tracking-[0.2em] px-4 py-2 uppercase font-mono hover:bg-gold hover:text-black transition-all duration-300">
+        registrarse
+      </a>
+    </div>
+
+    <!-- Hamburger — mobile -->
+    <button
+      class="hamburger md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
+      [class.hamburger-open]="menuOpen()"
+      (click)="toggleMenu()"
+      aria-label="Abrir menú">
+      <span class="bar-1"></span>
+      <span class="bar-2"></span>
+      <span class="bar-3"></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile menu -->
+  @if (menuOpen()) {
+    <div class="md:hidden bg-black/95 backdrop-blur-md border-t border-border px-8 py-8 flex flex-col gap-6">
+      @for (link of navLinks; track link.href) {
+        <a [href]="link.href"
+           class="font-body font-light text-sm tracking-[0.2em] text-cream/70 uppercase hover:text-cream transition-colors duration-300">
+          {{ link.label }}
+        </a>
+      }
+      <div class="flex flex-col gap-4 pt-4 border-t border-border">
+        <a href="/login"
+           class="font-mono text-xs tracking-[0.2em] text-cream/70 uppercase hover:text-cream transition-colors duration-300">
+          login
+        </a>
+        <a href="/register"
+           class="border border-gold text-gold text-xs tracking-[0.2em] px-4 py-3 uppercase font-mono text-center hover:bg-gold hover:text-black transition-all duration-300">
+          registrarse
+        </a>
+      </div>
+    </div>
+  }
+
+</header>

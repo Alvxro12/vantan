@@ -1,22 +1,33 @@
 @use "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+@theme {
+  --color-black:   #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-cream:   #F5F0E8;
+  --color-gold:    #C9A96E;
+  --color-border:  #333333;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  --spacing-section: 7rem;
+}
 
 @layer base {
-  :root {
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
-
-    --color-black: #0A0A0A;
-    --color-surface: #1A1A1A;
-    --color-cream: #F5F0E8;
-    --color-gold: #C9A96E;
-    --color-border: #333333;
-  }
-
   html, body {
     font-family: var(--font-body);
     background-color: var(--color-black);
     color: var(--color-cream);
   }
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.5); }
+  50%       { opacity: 0.8; transform: scaleY(1); }
+}
+
+.scroll-line {
+  animation: pulse-line 2s ease-in-out infinite;
+  transform-origin: top;
 }

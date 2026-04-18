@@ -1,0 +1,39 @@
+<footer
+  #sectionRef
+  class="bg-black border-t border-gold/30 py-16 px-8 md:px-16 transition-all duration-700"
+  [class.opacity-0]="!visible()"
+  [class.translate-y-8]="!visible()">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+    <!-- Columna 1 — Marca -->
+    <div>
+      <p class="font-display text-cream text-lg tracking-[0.3em]">VANTAN</p>
+      <p class="font-body font-light text-xs text-cream/40 leading-relaxed max-w-xs mt-4">
+        Calzado de autor, fabricado en series cortas en talleres de Alicante y Porto.
+        Un par por pie, una historia por par.
+      </p>
+      <p class="font-mono text-xs text-cream/20 mt-6">— DESDE 2017 · ES · PT</p>
+    </div>
+
+    <!-- Columnas 2, 3, 4 — Links -->
+    @for (col of columns; track col.title) {
+      <div>
+        <p class="font-mono text-xs text-gold tracking-[0.25em] mb-4 uppercase">{{ col.title }}</p>
+        @for (link of col.links; track link) {
+          <a class="font-body font-light text-xs text-cream/40 hover:text-cream transition-colors duration-300 block mb-2 cursor-pointer">
+            {{ link }}
+          </a>
+        }
+      </div>
+    }
+
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="border-t border-border mt-12 pt-8 flex justify-between items-center flex-wrap gap-4">
+    <span class="font-mono text-xs text-cream/20">© 2026 Vantan Maison · Todos los derechos reservados</span>
+    <span class="font-mono text-xs text-cream/20">Hecho con intención</span>
+  </div>
+
+</footer>
