@@ -6,7 +6,11 @@
       "Bash(npx tsc *)",
       "Bash(python -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('projects',{}\\).get\\('frontend',{}\\).get\\('architect',{}\\).get\\('build',{}\\).get\\('options',{}\\), indent=2\\)\\)\")",
       "Bash(mkdir -p public/assets/images)",
-      "Bash(mv src/assets/images/* public/assets/images/)"
+      "Bash(mv src/assets/images/* public/assets/images/)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(gunzip -c \"webfetch-1776619262386-t1g773.bin\")",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)"
     ]
   }
 }

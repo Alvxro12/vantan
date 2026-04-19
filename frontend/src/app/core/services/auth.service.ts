@@ -6,73 +6,50 @@ import { AuthResponse, LoginRequest, RegisterRequest } from '../../shared/models
 import { UserResponse } from '../../shared/models/user.model';
 import { environment } from '../../../environments/environment';
 
+const TOKEN_KEY = 'vantan_token';
+const USER_KEY  = 'vantan_user';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  // Access token en memoria — nunca en localStorage
-  private accessToken = signal<string | null>(null);
-  private currentUser = signal<UserResponse | null>(null);
+  private accessToken = signal<string | null>(localStorage.getItem(TOKEN_KEY));
+  private currentUser = signal<UserResponse | null>(
+    JSON.parse(localStorage.getItem(USER_KEY) ?? 'null')
+  );
 
-  // Signals públicos de solo lectura
   readonly isAuthenticated = computed(() => this.accessToken() !== null);
   readonly user = computed(() => this.currentUser());
   readonly token = computed(() => this.accessToken());
 
   constructor(private http: HttpClient) {}
 
-  // ─── Auth ─────────────────────────────────────────────────────────────────
-
   register(request: RegisterRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(
-      `${environment.apiUrl}/auth/register`,
-      request,
-      { withCredentials: true }
+      `${environment.apiUrl}/auth/register`, request
     ).pipe(
       tap(response => {
-        if (response.success && response.data) {
-          this.setSession(response.data);
-        }
+        if (response.success && response.data) this.setSession(response.data);
       })
     );
   }
 
   login(request: LoginRequest): Observable<ApiResponse<AuthResponse>> {
     return this.http.post<ApiResponse<AuthResponse>>(
-      `${environment.apiUrl}/auth/login`,
-      request,
-      { withCredentials: true }
+      `${environment.apiUrl}/auth/login`, request
     ).pipe(
       tap(response => {
-        if (response.success && response.data) {
-          this.setSession(response.data);
-        }
+        if (response.success && response.data) this.setSession(response.data);
       })
     );
   }
 
   logout(): Observable<ApiResponse<void>> {
     return this.http.post<ApiResponse<void>>(
-      `${environment.apiUrl}/auth/logout`,
-      {},
-      { withCredentials: true }
+      `${environment.apiUrl}/auth/logout`, {}
     ).pipe(
       tap(() => this.clearSession())
-    );
-  }
-
-  refresh(): Observable<ApiResponse<AuthResponse>> {
-    return this.http.post<ApiResponse<AuthResponse>>(
-      `${environment.apiUrl}/auth/refresh`,
-      {},
-      { withCredentials: true }
-    ).pipe(
-      tap(response => {
-        if (response.success && response.data) {
-          this.setSession(response.data);
-        }
-      })
     );
   }
 
@@ -82,34 +59,31 @@ export class AuthService {
     );
   }
 
-  // ─── Token ────────────────────────────────────────────────────────────────
-
-  setAccessToken(token: string): void {
-    this.accessToken.set(token);
-  }
-
   getAccessToken(): string | null {
     return this.accessToken();
   }
 
-  // ─── Session ──────────────────────────────────────────────────────────────
-
   private setSession(auth: AuthResponse): void {
+    const user: UserResponse = {
+      id: auth.user.id,
+      email: auth.user.email,
+      firstName: auth.user.firstName,
+      lastName: auth.user.lastName,
+      role: auth.user.role,
+      active: true,
+      createdAt: new Date().toISOString()
+    };
+
+    localStorage.setItem(TOKEN_KEY, auth.accessToken);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+
     this.accessToken.set(auth.accessToken);
-    if (auth.user) {
-      this.currentUser.set({
-        id: auth.user.id,
-        email: auth.user.email,
-        firstName: auth.user.firstName,
-        lastName: auth.user.lastName,
-        role: auth.user.role,
-        active: true,
-        createdAt: new Date().toISOString()
-      });
-    }
+    this.currentUser.set(user);
   }
 
   clearSession(): void {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
     this.accessToken.set(null);
     this.currentUser.set(null);
   }

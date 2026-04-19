@@ -19,7 +19,6 @@ public class RegisterUseCase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final RefreshTokenUseCase refreshTokenUseCase;
 
     @Transactional
     public AuthResponse execute(RegisterRequest request) {
@@ -42,11 +41,8 @@ public class RegisterUseCase {
                 saved.getId(), saved.getEmail(), saved.getRole().name()
         );
 
-        String refreshToken = refreshTokenUseCase.createRefreshToken(saved);
-
         return AuthResponse.builder()
                 .accessToken(accessToken)
-                .refreshToken(refreshToken)
                 .tokenType("Bearer")
                 .expiresIn(900000)
                 .user(AuthResponse.UserDto.builder()

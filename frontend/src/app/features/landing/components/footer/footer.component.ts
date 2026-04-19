@@ -18,7 +18,7 @@ export class FooterComponent implements AfterViewInit {
   columns: FooterColumn[] = [
     {
       title: 'COLECCION',
-      links: ['Otoño / Invierno 25', 'Primavera 25', 'Archivo', 'Ediciones limitadas', 'Custom']
+      links: ['Otoño / Invierno 26', 'Primavera 26', 'Archivo', 'Ediciones limitadas', 'Custom']
     },
     {
       title: 'EMPRESA',

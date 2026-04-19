@@ -1,0 +1,54 @@
+// Left editorial panel — slight gradient variation from login
+.left-panel {
+  background:
+    radial-gradient(ellipse at 60% 40%, rgba(201,169,110,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 70%, rgba(50,38,22,0.70) 0%, transparent 55%),
+    linear-gradient(145deg, #0f0d09 0%, #1a1612 40%, #0a0a0a 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.94 0 0 0 0 0.88 0 0 0 0.07 0'/></filter><rect width='400' height='400' filter='url(%23n)'/></svg>");
+    mix-blend-mode: overlay;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+.left-art {
+  &::after {
+    content: '';
+    display: block;
+    width: 68%;
+    aspect-ratio: 2.4/1;
+    background:
+      radial-gradient(ellipse at 60% 50%, rgba(201,169,110,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 35% 65%, rgba(70,55,35,0.60) 0%, transparent 55%);
+    filter: blur(3px);
+    opacity: 0.75;
+  }
+}
+
+.left-overlay {
+  background: linear-gradient(180deg, rgba(10,10,10,0.20) 0%, rgba(10,10,10,0.60) 100%);
+}
+
+.left-line {
+  background: linear-gradient(180deg, transparent 0%, #333333 30%, #333333 70%, transparent 100%);
+}
+
+// Input focus gold glow and error state
+.form-input {
+  &:focus {
+    border-color: #C9A96E;
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.18);
+    outline: none;
+  }
+
+  &.input-error {
+    border-color: #E57373;
+    box-shadow: 0 0 0 3px rgba(229, 115, 115, 0.1);
+  }
+}

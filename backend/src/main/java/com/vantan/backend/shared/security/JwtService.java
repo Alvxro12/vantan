@@ -12,7 +12,6 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -42,11 +41,6 @@ public class JwtService {
                 .expiration(Date.from(now.plusMillis(accessExpirationMs)))
                 .signWith(secretKey)
                 .compact();
-    }
-
-    public String generateOpaqueToken() {
-        return UUID.randomUUID().toString().replace("-", "") +
-                UUID.randomUUID().toString().replace("-", "");
     }
 
     // ─── Validación ───────────────────────────────────────────────────────────

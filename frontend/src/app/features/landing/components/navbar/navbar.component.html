@@ -15,7 +15,13 @@
     <nav class="hidden md:flex items-center gap-8">
       @for (link of navLinks; track link.href) {
         <a [href]="link.href"
-           class="font-body font-light text-xs tracking-[0.2em] text-cream/70 uppercase hover:text-cream transition-colors duration-300">
+   class="relative font-body font-light text-xs tracking-[0.2em] text-cream/70 uppercase 
+          hover:text-cream transition-colors duration-300
+          after:content-[''] after:absolute after:bottom-[-4px] after:left-0 
+          after:w-full after:h-px after:bg-gold
+          after:scale-x-0 after:origin-center
+          after:transition-transform after:duration-300
+          hover:after:scale-x-100">
           {{ link.label }}
         </a>
       }

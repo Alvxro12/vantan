@@ -1,46 +1,51 @@
 <section
-  class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden gap-8"
+  class="min-h-screen flex flex-col items-center relative overflow-hidden"
   style="background: radial-gradient(ellipse 60% 60% at 50% 60%, rgba(201,169,110,0.08) 0%, transparent 70%), #0A0A0A;">
 
-  <!-- Eyebrow -->
-  <div class="flex items-center gap-4">
+  <!-- Zona top: eyebrow anclado al inicio -->
+  <div class="pt-24 md:pt-32 flex items-center gap-4">
     <div class="w-12 h-px bg-gold"></div>
-    <span class="font-mono text-xs tracking-[0.3em] text-gold uppercase">NUEVA COLECCION 2025</span>
+    <span class="font-mono text-xs tracking-[0.3em] text-gold uppercase">NUEVA COLECCION 2026</span>
     <div class="w-12 h-px bg-gold"></div>
   </div>
 
-  <!-- Título -->
-  <h1 class="font-display text-6xl md:text-8xl text-center leading-tight">
-    <span class="text-cream">Diseñado para los</span><br>
-    <span class="text-cream">que se mueven </span><em class="italic text-gold">con</em><br>
-    <em class="italic text-gold">intención</em>
-  </h1>
+  <!-- Zona middle: contenido editorial, crece y centra independientemente -->
+  <div class="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 px-4 py-8">
 
-  <!-- Subtítulo -->
-  <p class="text-cream/50 font-body font-light text-sm text-center max-w-md mx-auto leading-relaxed">
-    Piezas fabricadas a mano en series limitadas. Cada par es una declaración silenciosa
-    — de forma, de materia, de propósito.
-  </p>
+    <!-- Título -->
+    <h1 class="font-display text-6xl md:text-8xl text-center leading-tight">
+      <span class="text-cream">Diseñado para los</span><br>
+      <span class="text-cream">que se mueven </span><em class="italic text-gold">con</em><br>
+      <em class="italic text-gold">intención</em>
+    </h1>
 
-  <!-- CTAs -->
-  <div class="flex gap-4 justify-center flex-wrap">
-    <a class="bg-cream text-black px-8 py-4 text-xs tracking-[0.2em] font-mono uppercase hover:bg-gold transition-all duration-300 cursor-pointer">
-      VER COLECCION →
-    </a>
-    <a class="border border-cream/30 text-cream px-8 py-4 text-xs tracking-[0.2em] font-mono uppercase hover:border-cream/60 transition-all duration-300 cursor-pointer">
-      LOOKBOOK AW25
-    </a>
+    <!-- Subtítulo -->
+    <p class="text-cream/50 font-body font-light text-sm text-center max-w-md leading-relaxed">
+      Piezas fabricadas a mano en series limitadas. Cada par es una declaración silenciosa
+      — de forma, de materia, de propósito.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex gap-4 justify-center flex-wrap">
+      <a class="bg-cream text-black px-8 py-4 text-xs tracking-[0.2em] font-mono uppercase hover:bg-gold transition-all duration-300 cursor-pointer">
+        VER COLECCION →
+      </a>
+      <a class="border border-cream/30 text-cream px-8 py-4 text-xs tracking-[0.2em] font-mono uppercase hover:border-cream/60 transition-all duration-300 cursor-pointer">
+        LOOKBOOK AW26
+      </a>
+    </div>
+
   </div>
 
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-    <span class="font-mono text-xs tracking-[0.3em] text-cream/30">SCROLL</span>
-    <div class="scroll-line w-px h-12 bg-gold/50"></div>
+  <!-- Zona bottom: scroll indicator en flujo normal, siempre al pie -->
+  <div class="pb-8 flex flex-col items-center gap-3">
+    <span class="hidden md:block font-mono text-xs tracking-[0.3em] text-cream/30">SCROLL</span>  
+    <div class="hidden md:block scroll-line w-px h-12 bg-gold/50 gap-12"></div>
   </div>
 
-  <!-- Label editorial -->
+  <!-- Label editorial (decorativo, absoluto) -->
   <span class="absolute bottom-8 right-8 font-mono text-xs text-cream/20 tracking-[0.2em]">
-    [ EDITORIAL • AW25 • FRAME 01 ]
+    [ EDITORIAL • AW26 • FRAME 01 ]
   </span>
 
 </section>

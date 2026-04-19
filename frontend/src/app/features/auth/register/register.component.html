@@ -1,1 +1,218 @@
-<p>register works!</p>
+<section class="flex h-screen overflow-hidden">
+
+  <!-- LEFT: Panel editorial -->
+  <div class="left-panel hidden md:flex w-2/5 flex-shrink-0 relative flex-col items-center justify-center overflow-hidden">
+    <div class="left-art absolute inset-0 flex items-center justify-center pointer-events-none"></div>
+    <div class="left-overlay absolute inset-0"></div>
+
+    <div class="relative z-10 text-center px-10">
+      <div class="font-display text-5xl font-semibold tracking-[0.12em] text-cream mb-5">VANTAN</div>
+      <div class="w-10 h-px bg-gold opacity-70 mx-auto mb-5"></div>
+      <div class="font-body text-xs font-light tracking-[0.3em] uppercase text-cream/50">
+        Forma · Materia · Propósito
+      </div>
+    </div>
+
+    <span class="absolute bottom-6 left-6 font-mono text-[9px] tracking-[0.2em] uppercase text-cream/20 z-10">
+      [ editorial · calzado · aw26 ]
+    </span>
+    <div class="left-line absolute top-0 right-0 bottom-0 w-px"></div>
+  </div>
+
+  <!-- RIGHT: Formulario -->
+  <div class="flex-1 bg-black flex items-center justify-center px-6 md:px-16 py-10 overflow-y-auto">
+
+    <div class="w-full max-w-[440px]">
+      <!-- Logo mobile -->
+      <div class="flex flex-col items-center mb-10 md:hidden">
+        <div class="font-display text-4xl font-semibold tracking-[0.12em] text-cream mb-2">VANTAN</div>
+        <div class="w-8 h-px bg-gold opacity-70"></div>
+      </div>
+
+      <h1 class="font-display text-[42px] font-normal text-cream tracking-tight mb-2">Crea tu cuenta</h1>
+      <p class="font-body text-sm font-light text-cream/40 tracking-wide mb-10">Únete a Vantan</p>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <!-- Nombre + Apellido (2 columnas) -->
+        <div class="grid grid-cols-2 gap-4 mb-[20px]">
+          <div>
+            <label for="firstName" class="block font-body text-[10px] font-normal tracking-[0.25em] uppercase text-cream/70 mb-2">
+              Nombre
+            </label>
+            <input
+              id="firstName"
+              type="text"
+              formControlName="firstName"
+              placeholder="Nombre"
+              autocomplete="given-name"
+              class="form-input w-full bg-surface border border-border rounded-[4px] text-cream font-body font-light text-sm px-4 py-[14px] placeholder:text-cream/30 transition-colors duration-200"
+              [ngClass]="{ 'input-error': firstNameError }"
+            >
+            @if (firstNameError) {
+              <p class="mt-1.5 text-[11px] font-light text-[#E57373]">{{ firstNameError }}</p>
+            }
+          </div>
+          <div>
+            <label for="lastName" class="block font-body text-[10px] font-normal tracking-[0.25em] uppercase text-cream/70 mb-2">
+              Apellido
+            </label>
+            <input
+              id="lastName"
+              type="text"
+              formControlName="lastName"
+              placeholder="Apellido"
+              autocomplete="family-name"
+              class="form-input w-full bg-surface border border-border rounded-[4px] text-cream font-body font-light text-sm px-4 py-[14px] placeholder:text-cream/30 transition-colors duration-200"
+              [ngClass]="{ 'input-error': lastNameError }"
+            >
+            @if (lastNameError) {
+              <p class="mt-1.5 text-[11px] font-light text-[#E57373]">{{ lastNameError }}</p>
+            }
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-[20px]">
+          <label for="email" class="block font-body text-[10px] font-normal tracking-[0.25em] uppercase text-cream/70 mb-2">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="tu@email.com"
+            autocomplete="email"
+            class="form-input w-full bg-surface border border-border rounded-[4px] text-cream font-body font-light text-sm px-4 py-[14px] placeholder:text-cream/30 transition-colors duration-200"
+            [ngClass]="{ 'input-error': emailError }"
+          >
+          @if (emailError) {
+            <p class="mt-1.5 text-[11px] font-light text-[#E57373]">{{ emailError }}</p>
+          }
+        </div>
+
+        <!-- Contraseña + Confirmar (2 columnas) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-[20px]">
+
+          <!-- Contraseña -->
+          <div>
+            <label for="password" class="block font-body text-[10px] font-normal tracking-[0.25em] uppercase text-cream/70 mb-2">
+              Contraseña
+            </label>
+            <div class="relative">
+              <input
+                id="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="••••••••"
+                autocomplete="new-password"
+                class="form-input w-full bg-surface border border-border rounded-[4px] text-cream font-body font-light text-sm px-4 pr-12 py-[14px] placeholder:text-cream/30 transition-colors duration-200"
+                [ngClass]="{ 'input-error': passwordError }"
+              >
+              <button
+                type="button"
+                (click)="showPassword.set(!showPassword())"
+                class="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-cream/30 hover:text-cream/60 transition-colors"
+                [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              >
+                @if (!showPassword()) {
+                  <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                } @else {
+                  <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                }
+              </button>
+            </div>
+            <!-- Barra de fortaleza -->
+            @if (passwordValue()) {
+              <div class="mt-2 h-[2px] bg-border rounded-sm overflow-hidden">
+                <div
+                  class="h-full transition-all duration-300"
+                  [style.width]="strengthWidth()"
+                  [style.background]="strengthColor()"
+                ></div>
+              </div>
+            }
+            @if (passwordError) {
+              <p class="mt-1.5 text-[11px] font-light text-[#E57373]">{{ passwordError }}</p>
+            }
+          </div>
+
+          <!-- Confirmar contraseña -->
+          <div>
+            <label for="confirmPassword" class="block font-body text-[10px] font-normal tracking-[0.25em] uppercase text-cream/70 mb-2">
+              Confirmar
+            </label>
+            <div class="relative">
+              <input
+                id="confirmPassword"
+                [type]="showConfirm() ? 'text' : 'password'"
+                formControlName="confirmPassword"
+                placeholder="••••••••"
+                autocomplete="new-password"
+                class="form-input w-full bg-surface border border-border rounded-[4px] text-cream font-body font-light text-sm px-4 pr-12 py-[14px] placeholder:text-cream/30 transition-colors duration-200"
+                [ngClass]="{ 'input-error': confirmError }"
+              >
+              <button
+                type="button"
+                (click)="showConfirm.set(!showConfirm())"
+                class="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-cream/30 hover:text-cream/60 transition-colors"
+                [attr.aria-label]="showConfirm() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              >
+                @if (!showConfirm()) {
+                  <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                } @else {
+                  <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                }
+              </button>
+            </div>
+            @if (confirmError) {
+              <p class="mt-1.5 text-[11px] font-light text-[#E57373]">{{ confirmError }}</p>
+            }
+          </div>
+
+        </div>
+
+        <!-- Error del servidor -->
+        @if (serverError()) {
+          <p class="mb-4 text-[12px] font-light text-[#E57373] tracking-wide text-center">{{ serverError() }}</p>
+        }
+
+        <!-- CTA -->
+        <button
+          type="submit"
+          [disabled]="isLoading()"
+          class="w-full mt-2 flex items-center justify-center gap-2.5 bg-gold text-black font-body font-normal text-xs tracking-[0.28em] uppercase px-4 py-[16px] rounded-[4px] transition-colors duration-200 hover:bg-[#D4B87A] active:bg-[#B89558] disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          @if (isLoading()) {
+            <svg class="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"/>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+            </svg>
+            <span>Creando cuenta...</span>
+          } @else {
+            <span>Crear cuenta</span>
+          }
+        </button>
+
+      </form>
+
+      <!-- Link a login -->
+      <p class="mt-6 text-center font-body text-sm font-light text-cream/40">
+        ¿Ya tienes cuenta?
+        <a routerLink="/login" class="text-gold hover:text-[#D4B87A] transition-colors ml-1">Inicia sesión</a>
+      </p>
+    </div>
+
+  </div>
+
+</section>
